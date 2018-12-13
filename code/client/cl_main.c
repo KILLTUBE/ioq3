@@ -48,10 +48,6 @@ cvar_t	*cl_voipProtocol;
 cvar_t	*cl_voip;
 #endif
 
-#ifdef USE_RENDERER_DLOPEN
-cvar_t	*cl_renderer;
-#endif
-
 cvar_t	*cl_nodelta;
 cvar_t	*cl_debugMove;
 
@@ -133,9 +129,6 @@ qboolean			cl_oldGameSet;
 
 // Structure containing functions exported from refresh DLL
 refexport_t	re;
-#ifdef USE_RENDERER_DLOPEN
-static void	*rendererLib = NULL;
-#endif
 
 ping_t	cl_pinglist[MAX_PINGREQUESTS];
 
@@ -3106,13 +3099,6 @@ void CL_ShutdownRef( void ) {
 	}
 
 	Com_Memset( &re, 0, sizeof( re ) );
-
-#ifdef USE_RENDERER_DLOPEN
-	if ( rendererLib ) {
-		Sys_UnloadLibrary( rendererLib );
-		rendererLib = NULL;
-	}
-#endif
 }
 
 /*
@@ -3199,40 +3185,9 @@ CL_InitRef
 void CL_InitRef( void ) {
 	refimport_t	ri;
 	refexport_t	*ret;
-#ifdef USE_RENDERER_DLOPEN
-	GetRefAPI_t		GetRefAPI;
-	char			dllName[MAX_OSPATH];
-#endif
 
 	Com_Printf( "----- Initializing Renderer ----\n" );
-
-#ifdef USE_RENDERER_DLOPEN
-	cl_renderer = Cvar_Get("cl_renderer", "opengl2", CVAR_ARCHIVE | CVAR_LATCH);
-
-	Com_sprintf(dllName, sizeof(dllName), "renderer_%s_" ARCH_STRING DLL_EXT, cl_renderer->string);
-
-	if(!(rendererLib = Sys_LoadDll(dllName, qfalse)) && strcmp(cl_renderer->string, cl_renderer->resetString))
-	{
-		Com_Printf("failed:\n\"%s\"\n", Sys_LibraryError());
-		Cvar_ForceReset("cl_renderer");
-
-		Com_sprintf(dllName, sizeof(dllName), "renderer_opengl2_" ARCH_STRING DLL_EXT);
-		rendererLib = Sys_LoadDll(dllName, qfalse);
-	}
-
-	if(!rendererLib)
-	{
-		Com_Printf("failed:\n\"%s\"\n", Sys_LibraryError());
-		Com_Error(ERR_FATAL, "Failed to load renderer");
-	}
-
-	GetRefAPI = Sys_LoadFunction(rendererLib, "GetRefAPI");
-	if(!GetRefAPI)
-	{
-		Com_Error(ERR_FATAL, "Can't load symbol GetRefAPI: '%s'",  Sys_LibraryError());
-	}
-#endif
-
+	
 	ri.Cmd_AddCommand = Cmd_AddCommand;
 	ri.Cmd_RemoveCommand = Cmd_RemoveCommand;
 	ri.Cmd_Argc = Cmd_Argc;

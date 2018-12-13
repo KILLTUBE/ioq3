@@ -36,10 +36,6 @@ glstate_t	glState;
 static void GfxInfo_f( void );
 static void GfxMemInfo_f( void );
 
-#ifdef USE_RENDERER_DLOPEN
-cvar_t  *com_altivec;
-#endif
-
 cvar_t	*r_flareSize;
 cvar_t	*r_flareFade;
 cvar_t	*r_flareCoeff;
@@ -1158,9 +1154,6 @@ R_Register
 */
 void R_Register( void ) 
 {
-	#ifdef USE_RENDERER_DLOPEN
-	com_altivec = ri.Cvar_Get("com_altivec", "1", CVAR_ARCHIVE);
-	#endif	
 
 	//
 	// latched and archived variables
@@ -1573,11 +1566,8 @@ GetRefAPI
 
 @@@@@@@@@@@@@@@@@@@@@
 */
-#ifdef USE_RENDERER_DLOPEN
-Q_EXPORT refexport_t* QDECL GetRefAPI ( int apiVersion, refimport_t *rimp ) {
-#else
+
 refexport_t *GetRefAPI ( int apiVersion, refimport_t *rimp ) {
-#endif
 
 	static refexport_t	re;
 

@@ -3320,13 +3320,9 @@ static void FS_Startup( const char *gameName )
 	fs_packFiles = 0;
 
 	fs_debug = Cvar_Get( "fs_debug", "0", 0 );
-	fs_basepath = Cvar_Get ("fs_basepath", Sys_DefaultInstallPath(), CVAR_INIT|CVAR_PROTECTED );
+	fs_basepath = Cvar_Get ("fs_basepath", ".", CVAR_INIT|CVAR_PROTECTED );
 	fs_basegame = Cvar_Get ("fs_basegame", "", CVAR_INIT );
-	homePath = Sys_DefaultHomePath();
-	if (!homePath || !homePath[0]) {
-		homePath = fs_basepath->string;
-	}
-	fs_homepath = Cvar_Get ("fs_homepath", homePath, CVAR_INIT|CVAR_PROTECTED );
+	fs_homepath = Cvar_Get ("fs_homepath", ".", CVAR_INIT|CVAR_PROTECTED );
 	fs_gamedirvar = Cvar_Get ("fs_game", "", CVAR_INIT|CVAR_SYSTEMINFO );
 
 	if (!gameName[0]) {

@@ -23,6 +23,27 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 // q_shared.c -- stateless support routines that are included in each code dll
 #include "q_shared.h"
 
+//#define Q_IsColorString(p)	((p) && *(p) == Q_COLOR_ESCAPE && *((p)+1) && isalnum(*((p)+1))) // ^[0-9a-zA-Z]
+
+qboolean Q_IsColorString(const char *p) {
+	if (!p)
+		return qfalse;
+
+	if (*(p) != Q_COLOR_ESCAPE)
+		return qfalse;
+
+	if (*((p)+1) == 0)
+		return qfalse;
+
+	if (*((p)+1) <= 0 || *((p)+1) >= 255)
+		return qfalse;
+
+	if (isalnum(*(p + 1)) == 0)
+		return qfalse;
+
+	return qtrue;
+}
+
 float Com_Clamp( float min, float max, float value ) {
 	if ( value < min ) {
 		return min;

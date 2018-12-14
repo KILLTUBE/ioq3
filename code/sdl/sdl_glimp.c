@@ -362,6 +362,8 @@ static void GLimp_ClearProcAddresses( void ) {
 #undef GLE
 }
 
+void imgui_set_sdl_window(SDL_Window *SDL_window);
+
 /*
 ===============
 GLimp_SetMode
@@ -605,6 +607,8 @@ static int GLimp_SetMode(int mode, qboolean fullscreen, qboolean noborder, qbool
 			ri.Printf( PRINT_DEVELOPER, "SDL_CreateWindow failed: %s\n", SDL_GetError( ) );
 			continue;
 		}
+
+		imgui_set_sdl_window(SDL_window);
 
 		if( fullscreen )
 		{

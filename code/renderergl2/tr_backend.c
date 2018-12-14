@@ -1343,6 +1343,9 @@ RB_SwapBuffers
 
 =============
 */
+
+void imgui_render();
+
 const void	*RB_SwapBuffers( const void *data ) {
 	const swapBuffersCommand_t	*cmd;
 
@@ -1398,7 +1401,7 @@ const void	*RB_SwapBuffers( const void *data ) {
 	}
 
 	GLimp_LogComment( "***************** RB_SwapBuffers *****************\n\n\n" );
-
+	imgui_render();
 	GLimp_EndFrame();
 
 	backEnd.framePostProcessed = qfalse;

@@ -181,7 +181,7 @@
       <ResourceOutputFileName>..\winquake.res</ResourceOutputFileName>
     </ResourceCompile>
     <Link>
-      <AdditionalDependencies>user32.lib;advapi32.lib;winmm.lib;wsock32.lib;ws2_32.lib;SDL2main.lib;SDL2.lib;OpenGL32.lib;msvcrtd.lib;psapi.lib;gdi32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>user32.lib;advapi32.lib;winmm.lib;wsock32.lib;ws2_32.lib;SDL2main.lib;SDL2.lib;OpenGL32.lib;msvcrtd.lib;psapi.lib;gdi32.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <OutputFile>$(OutDir)ioquake3.x86.exe</OutputFile>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <AdditionalLibraryDirectories>..\..\code\libs\win32;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
@@ -498,6 +498,28 @@
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Release TA|Win32'">MaxSpeed</Optimization>
       <BrowseInformation Condition="'$(Configuration)|$(Platform)'=='Release TA|Win32'">true</BrowseInformation>
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">MaxSpeed</Optimization>
+    </ClCompile>
+    <ClCompile Include="..\..\code\gl3w\GL\gl3w.c" />
+    <ClCompile Include="..\..\code\imgui\imgui.cpp">
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">CompileAsCpp</CompileAs>
+    </ClCompile>
+    <ClCompile Include="..\..\code\imgui\imgui_demo.cpp">
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">CompileAsCpp</CompileAs>
+    </ClCompile>
+    <ClCompile Include="..\..\code\imgui\imgui_draw.cpp">
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">CompileAsCpp</CompileAs>
+    </ClCompile>
+    <ClCompile Include="..\..\code\imgui\imgui_impl_opengl3.cpp">
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">CompileAsCpp</CompileAs>
+    </ClCompile>
+    <ClCompile Include="..\..\code\imgui\imgui_impl_sdl.cpp">
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">CompileAsCpp</CompileAs>
+    </ClCompile>
+    <ClCompile Include="..\..\code\imgui\imgui_widgets.cpp">
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">CompileAsCpp</CompileAs>
+    </ClCompile>
+    <ClCompile Include="..\..\code\imgui\main.cpp">
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">CompileAsCpp</CompileAs>
     </ClCompile>
     <ClCompile Include="..\..\code\jpeg-8c\jaricom.c" />
     <ClCompile Include="..\..\code\jpeg-8c\jcapimin.c" />
@@ -1062,6 +1084,16 @@
     <ClInclude Include="..\..\code\client\snd_public.h" />
     <ClInclude Include="..\..\code\game\bg_public.h" />
     <ClInclude Include="..\..\code\game\g_public.h" />
+    <ClInclude Include="..\..\code\gl3w\GL\gl3w.h" />
+    <ClInclude Include="..\..\code\gl3w\GL\glcorearb.h" />
+    <ClInclude Include="..\..\code\imgui\imconfig.h" />
+    <ClInclude Include="..\..\code\imgui\imgui.h" />
+    <ClInclude Include="..\..\code\imgui\imgui_impl_opengl3.h" />
+    <ClInclude Include="..\..\code\imgui\imgui_impl_sdl.h" />
+    <ClInclude Include="..\..\code\imgui\imgui_internal.h" />
+    <ClInclude Include="..\..\code\imgui\imstb_rectpack.h" />
+    <ClInclude Include="..\..\code\imgui\imstb_textedit.h" />
+    <ClInclude Include="..\..\code\imgui\imstb_truetype.h" />
     <ClInclude Include="..\..\code\jpeg-8c\jconfig.h" />
     <ClInclude Include="..\..\code\jpeg-8c\jdct.h" />
     <ClInclude Include="..\..\code\jpeg-8c\jerror.h" />

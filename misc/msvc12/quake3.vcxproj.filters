@@ -1,61 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="..\..\code\client\cl_avi.c" />
-    <ClCompile Include="..\..\code\client\cl_cgame.c" />
-    <ClCompile Include="..\..\code\client\cl_cin.c" />
-    <ClCompile Include="..\..\code\client\cl_console.c" />
-    <ClCompile Include="..\..\code\client\cl_curl.c" />
-    <ClCompile Include="..\..\code\client\cl_input.c" />
-    <ClCompile Include="..\..\code\client\cl_keys.c" />
-    <ClCompile Include="..\..\code\client\cl_main.c" />
-    <ClCompile Include="..\..\code\client\cl_net_chan.c" />
-    <ClCompile Include="..\..\code\client\cl_parse.c" />
-    <ClCompile Include="..\..\code\client\cl_scrn.c" />
-    <ClCompile Include="..\..\code\client\cl_ui.c" />
     <ClCompile Include="..\..\code\client\qal.c" />
-    <ClCompile Include="..\..\code\client\snd_adpcm.c" />
-    <ClCompile Include="..\..\code\client\snd_codec.c" />
-    <ClCompile Include="..\..\code\client\snd_codec_ogg.c" />
-    <ClCompile Include="..\..\code\client\snd_codec_wav.c" />
-    <ClCompile Include="..\..\code\client\snd_dma.c" />
-    <ClCompile Include="..\..\code\client\snd_main.c" />
-    <ClCompile Include="..\..\code\client\snd_mem.c" />
-    <ClCompile Include="..\..\code\client\snd_mix.c" />
-    <ClCompile Include="..\..\code\client\snd_openal.c" />
-    <ClCompile Include="..\..\code\client\snd_wavelet.c" />
-    <ClCompile Include="..\..\code\qcommon\cmd.c" />
-    <ClCompile Include="..\..\code\qcommon\cm_load.c" />
-    <ClCompile Include="..\..\code\qcommon\cm_patch.c" />
-    <ClCompile Include="..\..\code\qcommon\cm_polylib.c" />
-    <ClCompile Include="..\..\code\qcommon\cm_test.c" />
-    <ClCompile Include="..\..\code\qcommon\cm_trace.c" />
     <ClCompile Include="..\..\code\qcommon\common.c" />
-    <ClCompile Include="..\..\code\qcommon\cvar.c" />
-    <ClCompile Include="..\..\code\qcommon\files.c" />
-    <ClCompile Include="..\..\code\qcommon\huffman.c" />
-    <ClCompile Include="..\..\code\qcommon\ioapi.c" />
-    <ClCompile Include="..\..\code\qcommon\md4.c" />
-    <ClCompile Include="..\..\code\qcommon\md5.c" />
-    <ClCompile Include="..\..\code\qcommon\msg.c" />
-    <ClCompile Include="..\..\code\qcommon\net_chan.c" />
-    <ClCompile Include="..\..\code\qcommon\net_ip.c" />
-    <ClCompile Include="..\..\code\qcommon\puff.c" />
-    <ClCompile Include="..\..\code\qcommon\q_math.c" />
-    <ClCompile Include="..\..\code\qcommon\q_shared.c" />
-    <ClCompile Include="..\..\code\qcommon\unzip.c" />
-    <ClCompile Include="..\..\code\qcommon\vm.c" />
-    <ClCompile Include="..\..\code\qcommon\vm_interpreted.c" />
-    <ClCompile Include="..\..\code\qcommon\vm_x86.c" />
-    <ClCompile Include="..\..\code\server\sv_bot.c" />
-    <ClCompile Include="..\..\code\server\sv_ccmds.c" />
-    <ClCompile Include="..\..\code\server\sv_client.c" />
-    <ClCompile Include="..\..\code\server\sv_game.c" />
-    <ClCompile Include="..\..\code\server\sv_init.c" />
-    <ClCompile Include="..\..\code\server\sv_main.c" />
-    <ClCompile Include="..\..\code\server\sv_net_chan.c" />
-    <ClCompile Include="..\..\code\server\sv_snapshot.c" />
-    <ClCompile Include="..\..\code\server\sv_world.c" />
     <ClCompile Include="..\..\code\sys\con_log.c" />
     <ClCompile Include="..\..\code\sys\con_passive.c" />
     <ClCompile Include="..\..\code\sys\sys_autoupdater.c" />
@@ -644,29 +591,197 @@
     <ClCompile Include="..\..\code\sdl\sdl_glimp.c">
       <Filter>sdl2</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\code\client\cl_avi.c">
+      <Filter>client</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\code\client\cl_cgame.c">
+      <Filter>client</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\code\client\cl_cin.c">
+      <Filter>client</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\code\client\cl_console.c">
+      <Filter>client</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\code\client\cl_curl.c">
+      <Filter>client</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\code\client\cl_input.c">
+      <Filter>client</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\code\client\cl_keys.c">
+      <Filter>client</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\code\client\cl_main.c">
+      <Filter>client</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\code\client\cl_net_chan.c">
+      <Filter>client</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\code\client\cl_parse.c">
+      <Filter>client</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\code\client\cl_scrn.c">
+      <Filter>client</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\code\client\cl_ui.c">
+      <Filter>client</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\code\qcommon\cm_load.c">
+      <Filter>qcommon</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\code\qcommon\cm_patch.c">
+      <Filter>qcommon</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\code\qcommon\cm_polylib.c">
+      <Filter>qcommon</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\code\qcommon\cm_test.c">
+      <Filter>qcommon</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\code\qcommon\cm_trace.c">
+      <Filter>qcommon</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\code\qcommon\cmd.c">
+      <Filter>qcommon</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\code\qcommon\cvar.c">
+      <Filter>qcommon</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\code\qcommon\files.c">
+      <Filter>qcommon</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\code\qcommon\huffman.c">
+      <Filter>qcommon</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\code\qcommon\ioapi.c">
+      <Filter>qcommon</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\code\qcommon\md4.c">
+      <Filter>qcommon</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\code\qcommon\md5.c">
+      <Filter>qcommon</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\code\qcommon\msg.c">
+      <Filter>qcommon</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\code\qcommon\net_chan.c">
+      <Filter>qcommon</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\code\qcommon\net_ip.c">
+      <Filter>qcommon</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\code\qcommon\puff.c">
+      <Filter>qcommon</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\code\qcommon\q_math.c">
+      <Filter>qcommon</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\code\qcommon\q_shared.c">
+      <Filter>qcommon</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\code\qcommon\unzip.c">
+      <Filter>qcommon</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\code\qcommon\vm.c">
+      <Filter>qcommon</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\code\qcommon\vm_interpreted.c">
+      <Filter>qcommon</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\code\qcommon\vm_x86.c">
+      <Filter>qcommon</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\code\client\snd_adpcm.c">
+      <Filter>snd</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\code\client\snd_codec.c">
+      <Filter>snd</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\code\client\snd_codec_ogg.c">
+      <Filter>snd</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\code\client\snd_codec_wav.c">
+      <Filter>snd</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\code\client\snd_dma.c">
+      <Filter>snd</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\code\client\snd_main.c">
+      <Filter>snd</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\code\client\snd_mem.c">
+      <Filter>snd</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\code\client\snd_mix.c">
+      <Filter>snd</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\code\client\snd_openal.c">
+      <Filter>snd</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\code\client\snd_wavelet.c">
+      <Filter>snd</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\code\server\sv_world.c">
+      <Filter>sv</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\code\server\sv_bot.c">
+      <Filter>sv</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\code\server\sv_ccmds.c">
+      <Filter>sv</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\code\server\sv_client.c">
+      <Filter>sv</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\code\server\sv_game.c">
+      <Filter>sv</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\code\server\sv_init.c">
+      <Filter>sv</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\code\server\sv_main.c">
+      <Filter>sv</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\code\server\sv_net_chan.c">
+      <Filter>sv</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\code\server\sv_snapshot.c">
+      <Filter>sv</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\code\imgui\imgui.cpp">
+      <Filter>imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\code\imgui\imgui_demo.cpp">
+      <Filter>imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\code\imgui\imgui_draw.cpp">
+      <Filter>imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\code\imgui\imgui_widgets.cpp">
+      <Filter>imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\code\imgui\imgui_impl_opengl3.cpp">
+      <Filter>imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\code\imgui\imgui_impl_sdl.cpp">
+      <Filter>imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\code\imgui\main.cpp">
+      <Filter>imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\code\gl3w\GL\gl3w.c">
+      <Filter>gl3w\GL</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\code\cgame\cg_public.h" />
-    <ClInclude Include="..\..\code\client\client.h" />
-    <ClInclude Include="..\..\code\client\cl_curl.h" />
     <ClInclude Include="..\..\code\client\keycodes.h" />
     <ClInclude Include="..\..\code\client\keys.h" />
     <ClInclude Include="..\..\code\client\qal.h" />
-    <ClInclude Include="..\..\code\client\snd_local.h" />
-    <ClInclude Include="..\..\code\client\snd_public.h" />
     <ClInclude Include="..\..\code\game\bg_public.h" />
     <ClInclude Include="..\..\code\game\g_public.h" />
-    <ClInclude Include="..\..\code\qcommon\cm_local.h" />
-    <ClInclude Include="..\..\code\qcommon\cm_patch.h" />
-    <ClInclude Include="..\..\code\qcommon\cm_polylib.h" />
-    <ClInclude Include="..\..\code\qcommon\cm_public.h" />
-    <ClInclude Include="..\..\code\qcommon\puff.h" />
-    <ClInclude Include="..\..\code\qcommon\qcommon.h" />
-    <ClInclude Include="..\..\code\qcommon\qfiles.h" />
-    <ClInclude Include="..\..\code\qcommon\q_shared.h" />
-    <ClInclude Include="..\..\code\qcommon\surfaceflags.h" />
-    <ClInclude Include="..\..\code\qcommon\unzip.h" />
-    <ClInclude Include="..\..\code\qcommon\vm_local.h" />
     <ClInclude Include="..\..\code\renderercommon\qgl.h" />
     <ClInclude Include="..\..\code\renderercommon\tr_types.h" />
     <ClInclude Include="..\..\code\renderercommon\tr_public.h" />
@@ -799,6 +914,81 @@
     <ClInclude Include="..\..\code\renderercommon\tr_common.h">
       <Filter>renderercommon</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\code\client\cl_curl.h">
+      <Filter>client</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\code\client\client.h">
+      <Filter>client</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\code\qcommon\cm_local.h">
+      <Filter>qcommon</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\code\qcommon\cm_patch.h">
+      <Filter>qcommon</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\code\qcommon\cm_polylib.h">
+      <Filter>qcommon</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\code\qcommon\cm_public.h">
+      <Filter>qcommon</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\code\qcommon\puff.h">
+      <Filter>qcommon</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\code\qcommon\q_shared.h">
+      <Filter>qcommon</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\code\qcommon\qcommon.h">
+      <Filter>qcommon</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\code\qcommon\qfiles.h">
+      <Filter>qcommon</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\code\qcommon\surfaceflags.h">
+      <Filter>qcommon</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\code\qcommon\unzip.h">
+      <Filter>qcommon</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\code\qcommon\vm_local.h">
+      <Filter>qcommon</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\code\client\snd_local.h">
+      <Filter>snd</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\code\client\snd_public.h">
+      <Filter>snd</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\code\imgui\imconfig.h">
+      <Filter>imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\code\imgui\imgui.h">
+      <Filter>imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\code\imgui\imgui_internal.h">
+      <Filter>imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\code\imgui\imstb_rectpack.h">
+      <Filter>imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\code\imgui\imstb_textedit.h">
+      <Filter>imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\code\imgui\imstb_truetype.h">
+      <Filter>imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\code\imgui\imgui_impl_opengl3.h">
+      <Filter>imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\code\imgui\imgui_impl_sdl.h">
+      <Filter>imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\code\gl3w\GL\gl3w.h">
+      <Filter>gl3w\GL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\code\gl3w\GL\glcorearb.h">
+      <Filter>gl3w\GL</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="..\..\code\asm\ftola.asm" />
@@ -840,6 +1030,27 @@
     </Filter>
     <Filter Include="sdl2">
       <UniqueIdentifier>{86684880-5d1a-4288-b5e9-6c077dd2f60e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="client">
+      <UniqueIdentifier>{a3bdfbfb-b169-483d-b45d-1d9a841bd37a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="qcommon">
+      <UniqueIdentifier>{8692d186-7b2b-4eb4-bede-22f4dd73344d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="snd">
+      <UniqueIdentifier>{be68365b-82fd-4f2e-8e79-0fa167231642}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="sv">
+      <UniqueIdentifier>{e3bc84d0-92cc-4345-acce-2195e57d2659}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="imgui">
+      <UniqueIdentifier>{fef90745-462c-4e69-abe8-71ef819e7b65}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="gl3w">
+      <UniqueIdentifier>{91d3afd8-d96f-4d5b-b62b-2fc75d2b49af}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="gl3w\GL">
+      <UniqueIdentifier>{d1dde15c-a3ee-47f2-bdbe-64ced8d44b4e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

@@ -23,6 +23,10 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #ifndef __Q_SHARED_H
 #define __Q_SHARED_H
 
+#pragma once
+
+#include "../ccall.h"
+
 // q_shared.h -- included first by ALL program modules.
 // A user mod should never modify this file
 
@@ -198,7 +202,11 @@ typedef int intptr_t;
 
 typedef unsigned char 		byte;
 
-typedef enum {qfalse, qtrue}	qboolean;
+// works for C++ too, its way stricter on enum/int conversions
+#define qboolean int
+#define qfalse 0
+#define qtrue 1
+//typedef enum {qfalse, qtrue}	qboolean;
 
 typedef union {
 	float f;
@@ -443,8 +451,8 @@ extern vec4_t	g_color_table[8];
 
 struct cplane_s;
 
-extern	vec3_t	vec3_origin;
-extern	vec3_t	axisDefault[3];
+EXTERNC vec3_t	vec3_origin;
+EXTERNC vec3_t	axisDefault[3];
 
 #define	nanmask (255<<23)
 
@@ -672,58 +680,58 @@ void CrossProduct( const vec3_t v1, const vec3_t v2, vec3_t cross );
 
 #endif
 
-vec_t VectorNormalize (vec3_t v);		// returns vector length
-vec_t VectorNormalize2( const vec3_t v, vec3_t out );
-void Vector4Scale( const vec4_t in, vec_t scale, vec4_t out );
-void VectorRotate( vec3_t in, vec3_t matrix[3], vec3_t out );
-int Q_log2(int val);
+CCALL vec_t VectorNormalize (vec3_t v);		// returns vector length
+CCALL vec_t VectorNormalize2( const vec3_t v, vec3_t out );
+CCALL void Vector4Scale( const vec4_t in, vec_t scale, vec4_t out );
+CCALL void VectorRotate( vec3_t in, vec3_t matrix[3], vec3_t out );
+CCALL int Q_log2(int val);
 
-float Q_acos(float c);
+CCALL float Q_acos(float c);
 
-int		Q_rand( int *seed );
-float	Q_random( int *seed );
-float	Q_crandom( int *seed );
+CCALL int		Q_rand( int *seed );
+CCALL float	Q_random( int *seed );
+CCALL float	Q_crandom( int *seed );
 
 #define random()	((rand () & 0x7fff) / ((float)0x7fff))
 #define crandom()	(2.0 * (random() - 0.5))
 
-void vectoangles( const vec3_t value1, vec3_t angles);
-void AnglesToAxis( const vec3_t angles, vec3_t axis[3] );
+CCALL void vectoangles( const vec3_t value1, vec3_t angles);
+CCALL void AnglesToAxis( const vec3_t angles, vec3_t axis[3] );
 
-void AxisClear( vec3_t axis[3] );
-void AxisCopy( vec3_t in[3], vec3_t out[3] );
+CCALL void AxisClear( vec3_t axis[3] );
+CCALL void AxisCopy( vec3_t in[3], vec3_t out[3] );
 
-void SetPlaneSignbits( struct cplane_s *out );
-int BoxOnPlaneSide (vec3_t emins, vec3_t emaxs, struct cplane_s *plane);
+CCALL void SetPlaneSignbits( struct cplane_s *out );
+CCALL int BoxOnPlaneSide (vec3_t emins, vec3_t emaxs, struct cplane_s *plane);
 
-qboolean BoundsIntersect(const vec3_t mins, const vec3_t maxs,
+CCALL qboolean BoundsIntersect(const vec3_t mins, const vec3_t maxs,
 		const vec3_t mins2, const vec3_t maxs2);
-qboolean BoundsIntersectSphere(const vec3_t mins, const vec3_t maxs,
+CCALL qboolean BoundsIntersectSphere(const vec3_t mins, const vec3_t maxs,
 		const vec3_t origin, vec_t radius);
-qboolean BoundsIntersectPoint(const vec3_t mins, const vec3_t maxs,
+CCALL qboolean BoundsIntersectPoint(const vec3_t mins, const vec3_t maxs,
 		const vec3_t origin);
 
-float	AngleMod(float a);
-float	LerpAngle (float from, float to, float frac);
-float	AngleSubtract( float a1, float a2 );
-void	AnglesSubtract( vec3_t v1, vec3_t v2, vec3_t v3 );
+CCALL float	AngleMod(float a);
+CCALL float	LerpAngle (float from, float to, float frac);
+CCALL float	AngleSubtract( float a1, float a2 );
+CCALL void	AnglesSubtract( vec3_t v1, vec3_t v2, vec3_t v3 );
 
-float AngleNormalize360 ( float angle );
-float AngleNormalize180 ( float angle );
-float AngleDelta ( float angle1, float angle2 );
+CCALL float AngleNormalize360 ( float angle );
+CCALL float AngleNormalize180 ( float angle );
+CCALL float AngleDelta ( float angle1, float angle2 );
 
-qboolean PlaneFromPoints( vec4_t plane, const vec3_t a, const vec3_t b, const vec3_t c );
-void ProjectPointOnPlane( vec3_t dst, const vec3_t p, const vec3_t normal );
-void RotatePointAroundVector( vec3_t dst, const vec3_t dir, const vec3_t point, float degrees );
-void RotateAroundDirection( vec3_t axis[3], float yaw );
-void MakeNormalVectors( const vec3_t forward, vec3_t right, vec3_t up );
+CCALL qboolean PlaneFromPoints( vec4_t plane, const vec3_t a, const vec3_t b, const vec3_t c );
+CCALL void ProjectPointOnPlane( vec3_t dst, const vec3_t p, const vec3_t normal );
+CCALL void RotatePointAroundVector( vec3_t dst, const vec3_t dir, const vec3_t point, float degrees );
+CCALL void RotateAroundDirection( vec3_t axis[3], float yaw );
+CCALL void MakeNormalVectors( const vec3_t forward, vec3_t right, vec3_t up );
 // perpendicular vector could be replaced by this
 
 //int	PlaneTypeForNormal (vec3_t normal);
 
-void MatrixMultiply(float in1[3][3], float in2[3][3], float out[3][3]);
-void AngleVectors( const vec3_t angles, vec3_t forward, vec3_t right, vec3_t up);
-void PerpendicularVector( vec3_t dst, const vec3_t src );
+CCALL void MatrixMultiply(float in1[3][3], float in2[3][3], float out[3][3]);
+CCALL void AngleVectors( const vec3_t angles, vec3_t forward, vec3_t right, vec3_t up);
+CCALL void PerpendicularVector( vec3_t dst, const vec3_t src );
 
 #ifndef MAX
 #define MAX(x,y) ((x)>(y)?(x):(y))
@@ -735,21 +743,21 @@ void PerpendicularVector( vec3_t dst, const vec3_t src );
 
 //=============================================
 
-float Com_Clamp( float min, float max, float value );
+CCALL float Com_Clamp( float min, float max, float value );
 
-char	*COM_SkipPath( char *pathname );
-const char	*COM_GetExtension( const char *name );
-void	COM_StripExtension(const char *in, char *out, int destsize);
-qboolean COM_CompareExtension(const char *in, const char *ext);
-void	COM_DefaultExtension( char *path, int maxSize, const char *extension );
+CCALL char	*COM_SkipPath( char *pathname );
+CCALL const char	*COM_GetExtension( const char *name );
+CCALL void	COM_StripExtension(const char *in, char *out, int destsize);
+CCALL qboolean COM_CompareExtension(const char *in, const char *ext);
+CCALL void	COM_DefaultExtension( char *path, int maxSize, const char *extension );
 
-void	COM_BeginParseSession( const char *name );
-int		COM_GetCurrentParseLine( void );
-char	*COM_Parse( char **data_p );
-char	*COM_ParseExt( char **data_p, qboolean allowLineBreak );
-int		COM_Compress( char *data_p );
-void	COM_ParseError( char *format, ... ) __attribute__ ((format (printf, 1, 2)));
-void	COM_ParseWarning( char *format, ... ) __attribute__ ((format (printf, 1, 2)));
+CCALL void	COM_BeginParseSession( const char *name );
+CCALL int		COM_GetCurrentParseLine( void );
+CCALL char	*COM_Parse( char **data_p );
+CCALL char	*COM_ParseExt( char **data_p, qboolean allowLineBreak );
+CCALL int		COM_Compress( char *data_p );
+CCALL void	COM_ParseError( char *format, ... ) __attribute__ ((format (printf, 1, 2)));
+CCALL void	COM_ParseWarning( char *format, ... ) __attribute__ ((format (printf, 1, 2)));
 //int		COM_ParseInfos( char *buf, int max, char infos[][MAX_INFO_STRING] );
 
 #define MAX_TOKENLENGTH		1024
@@ -862,7 +870,7 @@ float	LittleFloat (const float *l);
 
 void	Swap_Init (void);
 */
-char	* QDECL va(char *format, ...) __attribute__ ((format (printf, 1, 2)));
+CCALL char	* QDECL va(char *format, ...) __attribute__ ((format (printf, 1, 2)));
 
 #define TRUNCATE_LENGTH	64
 void Com_TruncateLongString( char *buffer, const char *s );
@@ -872,17 +880,17 @@ void Com_TruncateLongString( char *buffer, const char *s );
 //
 // key / value info strings
 //
-char *Info_ValueForKey( const char *s, const char *key );
-void Info_RemoveKey( char *s, const char *key );
-void Info_RemoveKey_Big( char *s, const char *key );
-void Info_SetValueForKey( char *s, const char *key, const char *value );
-void Info_SetValueForKey_Big( char *s, const char *key, const char *value );
-qboolean Info_Validate( const char *s );
-void Info_NextPair( const char **s, char *key, char *value );
+CCALL char *Info_ValueForKey( const char *s, const char *key );
+CCALL void Info_RemoveKey( char *s, const char *key );
+CCALL void Info_RemoveKey_Big( char *s, const char *key );
+CCALL void Info_SetValueForKey( char *s, const char *key, const char *value );
+CCALL void Info_SetValueForKey_Big( char *s, const char *key, const char *value );
+CCALL qboolean Info_Validate( const char *s );
+CCALL void Info_NextPair( const char **s, char *key, char *value );
 
 // this is only here so the functions in q_shared.c and bg_*.c can link
-void	QDECL Com_Error( int level, const char *error, ... ) __attribute__ ((noreturn, format(printf, 2, 3)));
-void	QDECL Com_Printf( const char *msg, ... ) __attribute__ ((format (printf, 1, 2)));
+CCALL void	QDECL Com_Error( int level, const char *error, ... ) __attribute__ ((noreturn, format(printf, 2, 3)));
+CCALL void	QDECL Com_Printf( const char *msg, ... ) __attribute__ ((format (printf, 1, 2)));
 
 
 /*

@@ -20,9 +20,12 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 ===========================================================================
 */
 
+#pragma once
+
 #include "q_shared.h"
 #include "qcommon.h"
 #include "cm_polylib.h"
+#include "../ccall.h"
 
 #define	MAX_SUBMODELS			256
 #define	BOX_MODEL_HANDLE		255
@@ -133,12 +136,12 @@ typedef struct {
 // and to avoid various numeric issues
 #define	SURFACE_CLIP_EPSILON	(0.125)
 
-extern	clipMap_t	cm;
-extern	int			c_pointcontents;
-extern	int			c_traces, c_brush_traces, c_patch_traces;
-extern	cvar_t		*cm_noAreas;
-extern	cvar_t		*cm_noCurves;
-extern	cvar_t		*cm_playerCurveClip;
+EXTERNC	clipMap_t	cm;
+EXTERNC	int			c_pointcontents;
+EXTERNC	int			c_traces, c_brush_traces, c_patch_traces;
+EXTERNC	cvar_t		*cm_noAreas;
+EXTERNC	cvar_t		*cm_noCurves;
+EXTERNC	cvar_t		*cm_playerCurveClip;
 
 // cm_test.c
 
@@ -177,20 +180,20 @@ typedef struct leafList_s {
 } leafList_t;
 
 
-int CM_BoxBrushes( const vec3_t mins, const vec3_t maxs, cbrush_t **list, int listsize );
+CCALL int CM_BoxBrushes( const vec3_t mins, const vec3_t maxs, cbrush_t **list, int listsize );
 
-void CM_StoreLeafs( leafList_t *ll, int nodenum );
-void CM_StoreBrushes( leafList_t *ll, int nodenum );
+CCALL void CM_StoreLeafs( leafList_t *ll, int nodenum );
+CCALL void CM_StoreBrushes( leafList_t *ll, int nodenum );
 
-void CM_BoxLeafnums_r( leafList_t *ll, int nodenum );
+CCALL void CM_BoxLeafnums_r( leafList_t *ll, int nodenum );
 
-cmodel_t	*CM_ClipHandleToModel( clipHandle_t handle );
-qboolean CM_BoundsIntersect( const vec3_t mins, const vec3_t maxs, const vec3_t mins2, const vec3_t maxs2 );
-qboolean CM_BoundsIntersectPoint( const vec3_t mins, const vec3_t maxs, const vec3_t point );
+CCALL cmodel_t	*CM_ClipHandleToModel( clipHandle_t handle );
+CCALL qboolean CM_BoundsIntersect( const vec3_t mins, const vec3_t maxs, const vec3_t mins2, const vec3_t maxs2 );
+CCALL qboolean CM_BoundsIntersectPoint( const vec3_t mins, const vec3_t maxs, const vec3_t point );
 
 // cm_patch.c
 
-struct patchCollide_s	*CM_GeneratePatchCollide( int width, int height, vec3_t *points );
-void CM_TraceThroughPatchCollide( traceWork_t *tw, const struct patchCollide_s *pc );
-qboolean CM_PositionTestInPatchCollide( traceWork_t *tw, const struct patchCollide_s *pc );
-void CM_ClearLevelPatches( void );
+CCALL struct patchCollide_s	*CM_GeneratePatchCollide( int width, int height, vec3_t *points );
+CCALL void CM_TraceThroughPatchCollide( traceWork_t *tw, const struct patchCollide_s *pc );
+CCALL qboolean CM_PositionTestInPatchCollide( traceWork_t *tw, const struct patchCollide_s *pc );
+CCALL void CM_ClearLevelPatches( void );

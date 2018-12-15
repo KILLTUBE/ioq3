@@ -30,24 +30,25 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #endif
 
 #include "q_shared.h"
+#include "../ccall.h"
 
-vec3_t	vec3_origin = {0,0,0};
-vec3_t	axisDefault[3] = { { 1, 0, 0 }, { 0, 1, 0 }, { 0, 0, 1 } };
+EXTERNC vec3_t	vec3_origin = {0,0,0};
+EXTERNC vec3_t	axisDefault[3] = { { 1, 0, 0 }, { 0, 1, 0 }, { 0, 0, 1 } };
 
 
-vec4_t		colorBlack	= {0, 0, 0, 1};
-vec4_t		colorRed	= {1, 0, 0, 1};
-vec4_t		colorGreen	= {0, 1, 0, 1};
-vec4_t		colorBlue	= {0, 0, 1, 1};
-vec4_t		colorYellow	= {1, 1, 0, 1};
-vec4_t		colorMagenta= {1, 0, 1, 1};
-vec4_t		colorCyan	= {0, 1, 1, 1};
-vec4_t		colorWhite	= {1, 1, 1, 1};
-vec4_t		colorLtGrey	= {0.75, 0.75, 0.75, 1};
-vec4_t		colorMdGrey	= {0.5, 0.5, 0.5, 1};
-vec4_t		colorDkGrey	= {0.25, 0.25, 0.25, 1};
+EXTERNC vec4_t		colorBlack	= {0, 0, 0, 1};
+EXTERNC vec4_t		colorRed	= {1, 0, 0, 1};
+EXTERNC vec4_t		colorGreen	= {0, 1, 0, 1};
+EXTERNC vec4_t		colorBlue	= {0, 0, 1, 1};
+EXTERNC vec4_t		colorYellow	= {1, 1, 0, 1};
+EXTERNC vec4_t		colorMagenta= {1, 0, 1, 1};
+EXTERNC vec4_t		colorCyan	= {0, 1, 1, 1};
+EXTERNC vec4_t		colorWhite	= {1, 1, 1, 1};
+EXTERNC vec4_t		colorLtGrey	= {0.75, 0.75, 0.75, 1};
+EXTERNC vec4_t		colorMdGrey	= {0.5, 0.5, 0.5, 1};
+EXTERNC vec4_t		colorDkGrey	= {0.25, 0.25, 0.25, 1};
 
-vec4_t	g_color_table[8] =
+EXTERNC vec4_t	g_color_table[8] =
 	{
 	{0.0, 0.0, 0.0, 1.0},
 	{1.0, 0.0, 0.0, 1.0},
@@ -60,7 +61,7 @@ vec4_t	g_color_table[8] =
 	};
 
 
-vec3_t	bytedirs[NUMVERTEXNORMALS] =
+EXTERNC vec3_t	bytedirs[NUMVERTEXNORMALS] =
 {
 {-0.525731f, 0.000000f, 0.850651f}, {-0.442863f, 0.238856f, 0.864188f}, 
 {-0.295242f, 0.000000f, 0.955423f}, {-0.309017f, 0.500000f, 0.809017f}, 

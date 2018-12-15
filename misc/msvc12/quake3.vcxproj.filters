@@ -639,9 +639,6 @@
     <ClCompile Include="..\..\code\qcommon\cm_test.c">
       <Filter>qcommon</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\code\qcommon\cm_trace.c">
-      <Filter>qcommon</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\code\qcommon\cmd.c">
       <Filter>qcommon</Filter>
     </ClCompile>
@@ -773,6 +770,9 @@
     </ClCompile>
     <ClCompile Include="..\..\code\imgui\imgui_api.cpp">
       <Filter>imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\code\qcommon\cm_trace.cpp">
+      <Filter>qcommon</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

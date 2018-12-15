@@ -774,6 +774,9 @@
     <ClCompile Include="..\..\code\qcommon\cm_trace.cpp">
       <Filter>qcommon</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\code\bullet\bullet_init.cpp">
+      <Filter>bullet</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\code\cgame\cg_public.h" />
@@ -992,6 +995,9 @@
     <ClInclude Include="..\..\code\imgui\imgui_api.h">
       <Filter>imgui</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\code\bullet\bullet_init.h">
+      <Filter>bullet</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="..\..\code\asm\ftola.asm" />
@@ -1054,6 +1060,9 @@
     </Filter>
     <Filter Include="gl3w\GL">
       <UniqueIdentifier>{d1dde15c-a3ee-47f2-bdbe-64ced8d44b4e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="bullet">
+      <UniqueIdentifier>{3113bce6-dc33-4b97-8749-e2d321f8c25b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

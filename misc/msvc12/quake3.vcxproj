@@ -79,7 +79,8 @@
     <LinkIncremental>true</LinkIncremental>
     <TargetName>ioquake3.x86</TargetName>
     <EmbedManifest>false</EmbedManifest>
-    <LibraryPath>$(SolutionDir)..\..\..\SDL2-2.0.9\VisualC\Win32\Debug;$(LibraryPath)</LibraryPath>
+    <LibraryPath>$(SolutionDir)..\..\..\SDL2-2.0.9\VisualC\Win32\Debug;C:\OpenWarzone\bullet3\build\lib\RelWithDebInfo;$(LibraryPath)</LibraryPath>
+    <IncludePath>C:\OpenWarzone\bullet3\src;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <OutDir>..\..\build\release-msvc12-x86\</OutDir>
@@ -181,7 +182,7 @@
       <ResourceOutputFileName>..\winquake.res</ResourceOutputFileName>
     </ResourceCompile>
     <Link>
-      <AdditionalDependencies>user32.lib;advapi32.lib;winmm.lib;wsock32.lib;ws2_32.lib;SDL2main.lib;SDL2.lib;OpenGL32.lib;msvcrtd.lib;psapi.lib;gdi32.lib;opengl32.lib;C:\web\ioq3\misc\msvc12\..\..\build\debug-msvc12-x86\baseq3\cgamex86.lib;C:\web\ioq3\misc\msvc12\..\..\build\debug-msvc12-x86\baseq3\qagamex86.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>user32.lib;advapi32.lib;winmm.lib;wsock32.lib;ws2_32.lib;SDL2main.lib;SDL2.lib;OpenGL32.lib;msvcrtd.lib;psapi.lib;gdi32.lib;opengl32.lib;C:\web\ioq3\misc\msvc12\..\..\build\debug-msvc12-x86\baseq3\cgamex86.lib;C:\web\ioq3\misc\msvc12\..\..\build\debug-msvc12-x86\baseq3\qagamex86.lib;BulletCollision_RelWithDebugInfo.lib;BulletDynamics_RelWithDebugInfo.lib;LinearMath_RelWithDebugInfo.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <OutputFile>$(OutDir)ioquake3.x86.exe</OutputFile>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <AdditionalLibraryDirectories>..\..\code\libs\win32;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
@@ -356,6 +357,9 @@
     <ClCompile Include="..\..\code\botlib\l_precomp.c" />
     <ClCompile Include="..\..\code\botlib\l_script.c" />
     <ClCompile Include="..\..\code\botlib\l_struct.c" />
+    <ClCompile Include="..\..\code\bullet\bullet_init.cpp">
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">CompileAsCpp</CompileAs>
+    </ClCompile>
     <ClCompile Include="..\..\code\client\cl_avi.c" />
     <ClCompile Include="..\..\code\client\cl_cgame.c">
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug TA|Win32'">Disabled</Optimization>
@@ -1075,6 +1079,7 @@
     <ClInclude Include="..\..\code\botlib\l_script.h" />
     <ClInclude Include="..\..\code\botlib\l_struct.h" />
     <ClInclude Include="..\..\code\botlib\l_utils.h" />
+    <ClInclude Include="..\..\code\bullet\bullet_init.h" />
     <ClInclude Include="..\..\code\cgame\cg_public.h" />
     <ClInclude Include="..\..\code\client\client.h" />
     <ClInclude Include="..\..\code\client\cl_curl.h" />

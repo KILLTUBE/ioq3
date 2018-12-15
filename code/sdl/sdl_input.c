@@ -32,6 +32,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 #include "../client/client.h"
 #include "../sys/sys_local.h"
+#include "../imgui/imgui_api.h"
 
 static cvar_t *in_keyboardDebug     = NULL;
 
@@ -989,6 +990,9 @@ static void IN_ProcessEvents( void )
 
 	while( SDL_PollEvent( &e ) )
 	{
+
+		imgui_process_event(&e);
+
 		switch( e.type )
 		{
 			case SDL_KEYDOWN:

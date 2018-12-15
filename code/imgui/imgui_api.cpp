@@ -136,6 +136,10 @@ void imgui_frame_end() {
 	}
 }
 
+void imgui_process_event(SDL_Event* event) {
+	ImGui_ImplSDL2_ProcessEvent(event);
+}
+
 void imgui_render()
 {
 	ImGuiIO& io = ImGui::GetIO();

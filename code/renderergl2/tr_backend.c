@@ -22,6 +22,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #include "tr_local.h"
 #include "tr_fbo.h"
 #include "tr_dsa.h"
+#include "../imgui/imgui_api.h"
 
 backEndData_t	*backEndData;
 backEndState_t	backEnd;
@@ -1344,8 +1345,6 @@ RB_SwapBuffers
 =============
 */
 
-void imgui_render();
-
 const void	*RB_SwapBuffers( const void *data ) {
 	const swapBuffersCommand_t	*cmd;
 
@@ -1401,8 +1400,10 @@ const void	*RB_SwapBuffers( const void *data ) {
 	}
 
 	GLimp_LogComment( "***************** RB_SwapBuffers *****************\n\n\n" );
-	imgui_render();
-	GLimp_EndFrame();
+
+	// called in sys_main.c now
+	//imgui_render();
+	//GLimp_EndFrame();
 
 	backEnd.framePostProcessed = qfalse;
 	backEnd.projection2D = qfalse;

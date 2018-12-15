@@ -30,6 +30,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #include <string.h>
 #include <ctype.h>
 #include <errno.h>
+#include "../imgui/imgui_api.h"
 
 #ifndef DEDICATED
 #ifdef USE_LOCAL_HEADERS
@@ -609,6 +610,9 @@ void Sys_SigHandler( int signal )
 		Sys_Exit( 2 );
 }
 
+
+void GLimp_EndFrame(void);
+
 /*
 =================
 main
@@ -690,9 +694,16 @@ int main( int argc, char **argv )
 	signal( SIGTERM, Sys_SigHandler );
 	signal( SIGINT, Sys_SigHandler );
 
+	imgui_init();
 	while( 1 )
 	{
+		imgui_frame_start();
+
 		Com_Frame( );
+		
+		imgui_render();
+		imgui_frame_end();
+		GLimp_EndFrame();
 	}
 
 	return 0;

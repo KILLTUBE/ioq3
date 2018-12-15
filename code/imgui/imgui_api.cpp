@@ -8,6 +8,7 @@
 #include "imgui_impl_opengl3.h"
 #include <stdio.h>
 #include <SDL.h>
+#include "imgui_api.h"
 
 // About OpenGL function loaders: modern OpenGL doesn't have a standard header file and requires individual function pointers to be loaded manually. 
 // Helper libraries are often used for this purpose! Here we are supporting a few common ones: gl3w, glew, glad.
@@ -33,8 +34,7 @@ extern "C" void imgui_set_sdl_window(SDL_Window *window_) {
 
 #if 1
 
-extern "C" void imgui_render()
-{
+void imgui_init() {
 	// Setup SDL
 	//if (SDL_Init(SDL_INIT_VIDEO|SDL_INIT_TIMER) != 0)
 	//{
@@ -42,7 +42,7 @@ extern "C" void imgui_render()
 	//	return -1;
 	//}
 
-	// Decide GL+GLSL versions
+// Decide GL+GLSL versions
 #if __APPLE__
 	// GL 3.2 Core + GLSL 150
 	const char* glsl_version = "#version 150";
@@ -67,7 +67,7 @@ extern "C" void imgui_render()
 	SDL_GetCurrentDisplayMode(0, &current);
 	//SDL_Window* window = SDL_CreateWindow("Dear ImGui SDL2+OpenGL3 example", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 1280, 720, SDL_WINDOW_OPENGL|SDL_WINDOW_RESIZABLE);
 
-	
+
 	//SDL_GL_SetSwapInterval(1); // Enable vsync
 
 	// Initialize OpenGL loader
@@ -108,6 +108,37 @@ extern "C" void imgui_render()
 	style.WindowRounding = 0.0f;								// When viewports are enabled it is preferable to disable WinodwRounding
 	style.Colors[ImGuiCol_WindowBg].w = 1.0f;				   // When viewports are enabled it is preferable to disable WindowBg alpha
 
+
+}
+
+void imgui_frame_start() {
+	// Start the Dear ImGui frame
+	ImGui_ImplOpenGL3_NewFrame();
+	ImGui_ImplSDL2_NewFrame(window);
+	ImGui::NewFrame();
+}
+
+void imgui_frame_end() {
+	ImGuiIO& io = ImGui::GetIO();
+	// Rendering
+	ImGui::Render();
+	//SDL_GL_MakeCurrent(window, gl_context);
+	glViewport(0, 0, (int)io.DisplaySize.x, (int)io.DisplaySize.y);
+	//glClearColor(clear_color.x, clear_color.y, clear_color.z, clear_color.w);
+	//glClear(GL_COLOR_BUFFER_BIT);
+	ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+
+	// Update and Render additional Platform Windows
+	if (io.ConfigFlags & ImGuiConfigFlags_ViewportsEnable)
+	{
+		ImGui::UpdatePlatformWindows();
+		ImGui::RenderPlatformWindowsDefault();
+	}
+}
+
+void imgui_render()
+{
+	ImGuiIO& io = ImGui::GetIO();
 	// Load Fonts
 	// - If no fonts are loaded, dear imgui will use the default font. You can also load multiple fonts and use ImGui::PushFont()/PopFont() to select them. 
 	// - AddFontFromFileTTF() will return the ImFont* so you can store it if you need to select the font among multiple. 
@@ -147,10 +178,7 @@ extern "C" void imgui_render()
 				done = true;
 		}
 #endif
-		// Start the Dear ImGui frame
-		ImGui_ImplOpenGL3_NewFrame();
-		ImGui_ImplSDL2_NewFrame(window);
-		ImGui::NewFrame();
+
 
 		// 1. Show the big demo window (Most of the sample code is in ImGui::ShowDemoWindow()! You can browse its code to learn more about Dear ImGui!).
 		if (show_demo_window)
@@ -189,20 +217,7 @@ extern "C" void imgui_render()
 			ImGui::End();
 		}
 
-		// Rendering
-		ImGui::Render();
-		//SDL_GL_MakeCurrent(window, gl_context);
-		glViewport(0, 0, (int)io.DisplaySize.x, (int)io.DisplaySize.y);
-		//glClearColor(clear_color.x, clear_color.y, clear_color.z, clear_color.w);
-		//glClear(GL_COLOR_BUFFER_BIT);
-		ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 
-		// Update and Render additional Platform Windows
-		if (io.ConfigFlags & ImGuiConfigFlags_ViewportsEnable)
-		{
-			ImGui::UpdatePlatformWindows();
-			ImGui::RenderPlatformWindowsDefault();
-		}
 
 		//SDL_GL_MakeCurrent(window, gl_context);
 		//SDL_GL_SwapWindow(window);

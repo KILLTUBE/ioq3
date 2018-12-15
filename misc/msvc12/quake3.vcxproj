@@ -518,7 +518,7 @@
     <ClCompile Include="..\..\code\imgui\imgui_widgets.cpp">
       <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">CompileAsCpp</CompileAs>
     </ClCompile>
-    <ClCompile Include="..\..\code\imgui\main.cpp">
+    <ClCompile Include="..\..\code\imgui\imgui_api.cpp">
       <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">CompileAsCpp</CompileAs>
     </ClCompile>
     <ClCompile Include="..\..\code\jpeg-8c\jaricom.c" />
@@ -1088,6 +1088,7 @@
     <ClInclude Include="..\..\code\gl3w\GL\glcorearb.h" />
     <ClInclude Include="..\..\code\imgui\imconfig.h" />
     <ClInclude Include="..\..\code\imgui\imgui.h" />
+    <ClInclude Include="..\..\code\imgui\imgui_api.h" />
     <ClInclude Include="..\..\code\imgui\imgui_impl_opengl3.h" />
     <ClInclude Include="..\..\code\imgui\imgui_impl_sdl.h" />
     <ClInclude Include="..\..\code\imgui\imgui_internal.h" />

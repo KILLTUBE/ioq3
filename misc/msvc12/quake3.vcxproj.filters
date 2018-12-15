@@ -768,11 +768,11 @@
     <ClCompile Include="..\..\code\imgui\imgui_impl_sdl.cpp">
       <Filter>imgui</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\code\imgui\main.cpp">
-      <Filter>imgui</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\code\gl3w\GL\gl3w.c">
       <Filter>gl3w\GL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\code\imgui\imgui_api.cpp">
+      <Filter>imgui</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -988,6 +988,9 @@
     </ClInclude>
     <ClInclude Include="..\..\code\gl3w\GL\glcorearb.h">
       <Filter>gl3w\GL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\code\imgui\imgui_api.h">
+      <Filter>imgui</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

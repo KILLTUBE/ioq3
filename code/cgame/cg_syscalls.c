@@ -30,6 +30,8 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #define NO_GL
 #include "../renderergl2/tr_local.h"
 
+extern refexport_t	re;
+
 intptr_t (QDECL *syscall_cgame)( intptr_t arg, ... ) = (intptr_t (QDECL *)( intptr_t, ...))-1;
 
 
@@ -295,7 +297,9 @@ void	trap_cgame_R_SetColor( const float *rgba ) {
 
 void	trap_cgame_R_DrawStretchPic( float x, float y, float w, float h, 
 							   float s1, float t1, float s2, float t2, qhandle_t hShader ) {
-	syscall_cgame( CG_R_DRAWSTRETCHPIC, PASSFLOAT(x), PASSFLOAT(y), PASSFLOAT(w), PASSFLOAT(h), PASSFLOAT(s1), PASSFLOAT(t1), PASSFLOAT(s2), PASSFLOAT(t2), hShader );
+	//syscall_cgame( CG_R_DRAWSTRETCHPIC, PASSFLOAT(x), PASSFLOAT(y), PASSFLOAT(w), PASSFLOAT(h), PASSFLOAT(s1), PASSFLOAT(t1), PASSFLOAT(s2), PASSFLOAT(t2), hShader );
+	re.DrawStretchPic((x), (y), (w), (h), (s1), (t1), (s2), (t2), hShader);
+
 }
 
 void	trap_cgame_R_ModelBounds( clipHandle_t model, vec3_t mins, vec3_t maxs ) {

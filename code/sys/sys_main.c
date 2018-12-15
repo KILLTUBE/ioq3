@@ -635,6 +635,10 @@ void Sys_SigHandler( int signal )
 
 void GLimp_EndFrame(void);
 
+void GL_BindNullTextures(void);
+void GL_BindNullProgram(void);
+void R_BindNullVao(void);
+
 /*
 =================
 main
@@ -720,7 +724,9 @@ int main( int argc, char **argv )
 	while( 1 )
 	{
 		imgui_frame_start();
-
+		GL_BindNullProgram();
+		GL_BindNullTextures();
+		R_BindNullVao();
 		Com_Frame( );
 		
 		imgui_render();

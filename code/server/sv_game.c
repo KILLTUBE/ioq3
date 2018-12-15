@@ -24,6 +24,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #include "server.h"
 
 #include "../botlib/botlib.h"
+#include "../qcommon/vm_local.h"
 
 botlib_export_t	*botlib_export;
 
@@ -888,7 +889,10 @@ static void SV_InitGameVM( qboolean restart ) {
 	
 	// use the current msec count for a random seed
 	// init for this gamestate
-	VM_Call (gvm, GAME_INIT, sv.time, Com_Milliseconds(), restart);
+	//VM_Call (gvm, GAME_INIT, sv.time, Com_Milliseconds(), restart);
+	//void G_InitGame(int levelTime, int randomSeed, int restart);
+	currentVM = gvm;
+	G_InitGame(sv.time, Com_Milliseconds(), restart);
 }
 
 

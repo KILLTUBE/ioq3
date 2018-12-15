@@ -508,8 +508,8 @@ Used to load a development dll instead of a virtual machine
 =================
 */
 
-intptr_t vmMain(int command, int arg0, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7, int arg8, int arg9, int arg10, int arg11);
-void dllEntry(intptr_t(QDECL  *syscallptr)(intptr_t arg, ...));
+intptr_t vmMain_cgame(int command, int arg0, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7, int arg8, int arg9, int arg10, int arg11);
+void dllEntry_cgame(intptr_t(QDECL  *syscallptr)(intptr_t arg, ...));
 
 void *Sys_LoadGameDll(const char *name,
 	intptr_t (QDECL **entryPoint)(int, ...),
@@ -521,8 +521,8 @@ void *Sys_LoadGameDll(const char *name,
 	assert(name);
 
 	if (strcmp(name, ".\\baseq3\\cgamex86.dll") == 0) {
-		dllEntry_ = dllEntry;
-		*entryPoint = vmMain;
+		dllEntry_ = dllEntry_cgame;
+		*entryPoint = vmMain_cgame;
 		dllEntry_(systemcalls);
 		return;
 	}

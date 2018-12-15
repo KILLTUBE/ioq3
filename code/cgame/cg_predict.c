@@ -102,7 +102,7 @@ static void CG_ClipMoveToEntities ( const vec3_t start, const vec3_t mins, const
 
 		if ( ent->solid == SOLID_BMODEL ) {
 			// special value for bmodel
-			cmodel = trap_CM_InlineModel( ent->modelindex );
+			cmodel = trap_cgame_CM_InlineModel( ent->modelindex );
 			VectorCopy( cent->lerpAngles, angles );
 			BG_EvaluateTrajectory( &cent->currentState.pos, cg.physicsTime, origin );
 		} else {
@@ -116,13 +116,13 @@ static void CG_ClipMoveToEntities ( const vec3_t start, const vec3_t mins, const
 			bmins[2] = -zd;
 			bmaxs[2] = zu;
 
-			cmodel = trap_CM_TempBoxModel( bmins, bmaxs );
+			cmodel = trap_cgame_CM_TempBoxModel( bmins, bmaxs );
 			VectorCopy( vec3_origin, angles );
 			VectorCopy( cent->lerpOrigin, origin );
 		}
 
 
-		trap_CM_TransformedBoxTrace ( &trace, start, end,
+		trap_cgame_CM_TransformedBoxTrace ( &trace, start, end,
 			mins, maxs, cmodel,  mask, origin, angles);
 
 		if (trace.allsolid || trace.fraction < tr->fraction) {
@@ -146,7 +146,7 @@ void	CG_Trace( trace_t *result, const vec3_t start, const vec3_t mins, const vec
 					 int skipNumber, int mask ) {
 	trace_t	t;
 
-	trap_CM_BoxTrace ( &t, start, end, mins, maxs, 0, mask);
+	trap_cgame_CM_BoxTrace ( &t, start, end, mins, maxs, 0, mask);
 	t.entityNum = t.fraction != 1.0 ? ENTITYNUM_WORLD : ENTITYNUM_NONE;
 	// check all other solid models
 	CG_ClipMoveToEntities (start, mins, maxs, end, skipNumber, mask, &t);
@@ -166,7 +166,7 @@ int		CG_PointContents( const vec3_t point, int passEntityNum ) {
 	clipHandle_t cmodel;
 	int			contents;
 
-	contents = trap_CM_PointContents (point, 0);
+	contents = trap_cgame_CM_PointContents (point, 0);
 
 	for ( i = 0 ; i < cg_numSolidEntities ; i++ ) {
 		cent = cg_solidEntities[ i ];
@@ -181,12 +181,12 @@ int		CG_PointContents( const vec3_t point, int passEntityNum ) {
 			continue;
 		}
 
-		cmodel = trap_CM_InlineModel( ent->modelindex );
+		cmodel = trap_cgame_CM_InlineModel( ent->modelindex );
 		if ( !cmodel ) {
 			continue;
 		}
 
-		contents |= trap_CM_TransformedPointContents( point, cmodel, cent->lerpOrigin, cent->lerpAngles );
+		contents |= trap_cgame_CM_TransformedPointContents( point, cmodel, cent->lerpOrigin, cent->lerpAngles );
 	}
 
 	return contents;
@@ -218,8 +218,8 @@ static void CG_InterpolatePlayerState( qboolean grabAngles ) {
 		usercmd_t	cmd;
 		int			cmdNum;
 
-		cmdNum = trap_GetCurrentCmdNumber();
-		trap_GetUserCmd( cmdNum, &cmd );
+		cmdNum = trap_cgame_GetCurrentCmdNumber();
+		trap_cgame_GetUserCmd( cmdNum, &cmd );
 
 		PM_UpdateViewAngles( out, &cmd );
 	}
@@ -355,12 +355,12 @@ static void CG_TouchTriggerPrediction( void ) {
 			continue;
 		}
 
-		cmodel = trap_CM_InlineModel( ent->modelindex );
+		cmodel = trap_cgame_CM_InlineModel( ent->modelindex );
 		if ( !cmodel ) {
 			continue;
 		}
 
-		trap_CM_BoxTrace( &trace, cg.predictedPlayerState.origin, cg.predictedPlayerState.origin, 
+		trap_cgame_CM_BoxTrace( &trace, cg.predictedPlayerState.origin, cg.predictedPlayerState.origin, 
 			cg_pmove.mins, cg_pmove.maxs, cmodel, -1 );
 
 		if ( !trace.startsolid ) {
@@ -457,13 +457,13 @@ void CG_PredictPlayerState( void ) {
 	// save the state before the pmove so we can detect transitions
 	oldPlayerState = cg.predictedPlayerState;
 
-	current = trap_GetCurrentCmdNumber();
+	current = trap_cgame_GetCurrentCmdNumber();
 
 	// if we don't have the commands right after the snapshot, we
 	// can't accurately predict a current position, so just freeze at
 	// the last good position we had
 	cmdNum = current - CMD_BACKUP + 1;
-	trap_GetUserCmd( cmdNum, &oldestCmd );
+	trap_cgame_GetUserCmd( cmdNum, &oldestCmd );
 	if ( oldestCmd.serverTime > cg.snap->ps.commandTime 
 		&& oldestCmd.serverTime < cg.time ) {	// special check for map_restart
 		if ( cg_showmiss.integer ) {
@@ -473,7 +473,7 @@ void CG_PredictPlayerState( void ) {
 	}
 
 	// get the latest command so we can know which commands are from previous map_restarts
-	trap_GetUserCmd( current, &latestCmd );
+	trap_cgame_GetUserCmd( current, &latestCmd );
 
 	// get the most recent information we have, even if
 	// the server time is beyond our current cg.time,
@@ -488,12 +488,12 @@ void CG_PredictPlayerState( void ) {
 	}
 
 	if ( pmove_msec.integer < 8 ) {
-		trap_Cvar_Set("pmove_msec", "8");
-		trap_Cvar_Update(&pmove_msec);
+		trap_cgame_Cvar_Set("pmove_msec", "8");
+		trap_cgame_Cvar_Update(&pmove_msec);
 	}
 	else if (pmove_msec.integer > 33) {
-		trap_Cvar_Set("pmove_msec", "33");
-		trap_Cvar_Update(&pmove_msec);
+		trap_cgame_Cvar_Set("pmove_msec", "33");
+		trap_cgame_Cvar_Update(&pmove_msec);
 	}
 
 	cg_pmove.pmove_fixed = pmove_fixed.integer;// | cg_pmove_fixed.integer;
@@ -503,7 +503,7 @@ void CG_PredictPlayerState( void ) {
 	moved = qfalse;
 	for ( cmdNum = current - CMD_BACKUP + 1 ; cmdNum <= current ; cmdNum++ ) {
 		// get the command
-		trap_GetUserCmd( cmdNum, &cg_pmove.cmd );
+		trap_cgame_GetUserCmd( cmdNum, &cg_pmove.cmd );
 
 		if ( cg_pmove.pmove_fixed ) {
 			PM_UpdateViewAngles( cg_pmove.ps, &cg_pmove.cmd );

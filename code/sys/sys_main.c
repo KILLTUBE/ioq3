@@ -507,14 +507,26 @@ Sys_LoadGameDll
 Used to load a development dll instead of a virtual machine
 =================
 */
+
+intptr_t vmMain(int command, int arg0, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7, int arg8, int arg9, int arg10, int arg11);
+void dllEntry(intptr_t(QDECL  *syscallptr)(intptr_t arg, ...));
+
 void *Sys_LoadGameDll(const char *name,
 	intptr_t (QDECL **entryPoint)(int, ...),
 	intptr_t (*systemcalls)(intptr_t, ...))
 {
 	void *libHandle;
-	void (*dllEntry)(intptr_t (*syscallptr)(intptr_t, ...));
+	void (*dllEntry_)(intptr_t (*syscallptr)(intptr_t, ...));
 
 	assert(name);
+
+	if (strcmp(name, ".\\baseq3\\cgamex86.dll") == 0) {
+		dllEntry_ = dllEntry;
+		*entryPoint = vmMain;
+		dllEntry_(systemcalls);
+		return;
+	}
+
 
 	if(!Sys_DllExtension(name))
 	{
@@ -531,10 +543,10 @@ void *Sys_LoadGameDll(const char *name,
 		return NULL;
 	}
 
-	dllEntry = Sys_LoadFunction( libHandle, "dllEntry" );
+	dllEntry_ = Sys_LoadFunction( libHandle, "dllEntry" );
 	*entryPoint = Sys_LoadFunction( libHandle, "vmMain" );
 
-	if ( !*entryPoint || !dllEntry )
+	if ( !*entryPoint || !dllEntry_)
 	{
 		Com_Printf ( "Sys_LoadGameDll(%s) failed to find vmMain function:\n\"%s\" !\n", name, Sys_LibraryError( ) );
 		Sys_UnloadLibrary(libHandle);
@@ -543,7 +555,7 @@ void *Sys_LoadGameDll(const char *name,
 	}
 
 	Com_Printf ( "Sys_LoadGameDll(%s) found vmMain function at %p\n", name, *entryPoint );
-	dllEntry( systemcalls );
+	dllEntry_( systemcalls );
 
 	return libHandle;
 }

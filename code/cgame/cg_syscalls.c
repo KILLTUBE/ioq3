@@ -27,6 +27,8 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #endif
 
 #include "cg_local.h"
+#define NO_GL
+#include "../renderergl2/tr_local.h"
 
 static intptr_t (QDECL *syscall)( intptr_t arg, ... ) = (intptr_t (QDECL *)( intptr_t, ...))-1;
 
@@ -283,7 +285,8 @@ void	trap_R_RenderScene( const refdef_t *fd ) {
 }
 
 void	trap_R_SetColor( const float *rgba ) {
-	syscall( CG_R_SETCOLOR, rgba );
+	//syscall( CG_R_SETCOLOR, rgba );
+	RE_SetColor(rgba);
 }
 
 void	trap_R_DrawStretchPic( float x, float y, float w, float h, 

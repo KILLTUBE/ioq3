@@ -1738,6 +1738,30 @@ void ClientCommand( int clientNum ) {
 		Cmd_Tell_f ( ent );
 		return;
 	}
+
+	if (Q_stricmp(cmd, "bullet") == 0) {
+		Com_Printf("spawn bullet model\n");
+		gentity_t *testmodel = G_Spawn();
+		testmodel->clipmask = CONTENTS_SOLID;
+		testmodel->r.contents = CONTENTS_SOLID;
+		testmodel->s.eType = ET_GENERAL;
+		testmodel->r.svFlags = SVF_USE_CURRENT_ORIGIN;
+		//testmodel->s.modelindex = G_ModelIndex(SP_PODIUM_MODEL);
+		testmodel->s.modelindex = G_ModelIndex("models/box2.iqm");
+		testmodel->s.modelindex2 = 0;
+		Com_Printf("model: %d\n", testmodel->model); // always 1 ?!
+		vec3_t pos = { 670, 2086, 50  }; // q3dm1 outside rocketlauncher
+		G_SetOrigin(testmodel, pos);
+		VectorSet(testmodel->s.angles, 0, 0, 0);
+		VectorSet(testmodel->s.angles2, 0, 0, 0);
+		VectorSet(testmodel->r.mins, -16, -16, -16);
+		VectorSet(testmodel->r.maxs, 16, 16, 16);
+		//testmodel->timestamp = level.time + 1000;
+		//testmodel->s.number = testmodel - g_entities;
+		testmodel->takedamage = qfalse;
+		trap_game_LinkEntity(testmodel);
+	}
+
 #ifdef MISSIONPACK
 	if (Q_stricmp (cmd, "vsay") == 0) {
 		Cmd_Voice_f (ent, SAY_ALL, qfalse, qfalse);

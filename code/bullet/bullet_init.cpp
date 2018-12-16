@@ -3,6 +3,7 @@
 #include <btBulletDynamicsCommon.h>
 /// This is a Hello World program for running a basic Bullet physics simulation
 #include "bullet_init.h"
+#include <BulletDynamics/Dynamics/btRigidBody.h>
 
 btDefaultCollisionConfiguration *collisionConfiguration = NULL;
 btCollisionDispatcher *dispatcher = NULL;
@@ -14,7 +15,38 @@ btDiscreteDynamicsWorld *dynamicsWorld = NULL;
 //make sure to re-use collision shapes among rigid bodies whenever possible!
 btAlignedObjectArray<btCollisionShape*> collisionShapes;
 
+
+// add_infinite_ground(new pc.Vec3(0, 1, 0), new pc.Vec3(0, 0, 0), pc.Quat.IDENTITY);
+void add_infinite_ground(btVector3 normal_, btVector3 position_, btQuaternion rotation_) {
+	// there isn't any infinite plane in PlayCanvas (yet)
+	// this just makes sure that entities arent falling into the void
+	//auto normal = new btVector3(normal_.x, normal_.y, normal_.z);
+	auto normal = normal_;
+	//auto origin = new btVector3(position_.x, position_.y, position_.z);
+	auto origin = position_;
+	//auto rotation = new btQuaternion(rotation_.x, rotation_.y, rotation_.z, rotation_.w);
+	auto rotation = rotation_;
+	auto shape = new btStaticPlaneShape(normal, 0);
+	auto transform = /*new*/ btTransform();
+	transform.setIdentity();
+	transform.setOrigin(origin);
+	transform.setRotation(rotation);
+	auto localInertia = new btVector3(0, 0, 0);
+	auto motionState = new btDefaultMotionState(transform);
+	
+	auto rigidBodyInfo = new btRigidBody::btRigidBodyConstructionInfo(0, motionState, shape, *localInertia);
+	auto body = new btRigidBody(*rigidBodyInfo);
+	//body.entity = new pc.Entity("dummy entity for add_infinite_ground");
+	//app.root.addChild(body.entity);
+	//app.systems.rigidbody.dynamicsWorld.addRigidBody(body);
+	dynamicsWorld->addRigidBody(body);
+	//return body;
+}
+
 void bullet_init() {
+
+	
+	
 	///collision configuration contains default setup for memory, collision setup. Advanced users can create their own configuration.
 	collisionConfiguration = new btDefaultCollisionConfiguration();
 
@@ -96,6 +128,9 @@ void bullet_init() {
 		dynamicsWorld->addRigidBody(body);
 	}
 
+
+
+	add_infinite_ground(btVector3(0, 0, 1), btVector3(0, 0, 49), btQuaternion(0,0,0));
 }
 
 

@@ -20,6 +20,8 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 ===========================================================================
 */
 #include "cm_local.h"
+#include "../imgui/imgui.h"
+#include "../bullet/bullet_init.h"
 
 // always use bbox vs. bbox collision and never capsule vs. bbox or vice versa
 //#define ALWAYS_BBOX_VS_BBOX
@@ -1340,6 +1342,17 @@ void CM_Trace( trace_t *results, const vec3_t start, const vec3_t end, vec3_t mi
 		}
 	}
 
+	//Com_Printf("",tw.trace.)
+	if (tw.end[2] > 674)
+		tw.end[2] = 674;
+
+	vec3_t delta;
+	//VectorSubtract(&delta, end, start); // c = a - b
+	//delta[0] = end[0] - start[0];
+
+
+	//tw.trace.pla
+
 	// generate endpos from the original, unmodified start/end
 	if ( tw.trace.fraction == 1 ) {
 		VectorCopy (end, tw.trace.endpos);
@@ -1348,6 +1361,97 @@ void CM_Trace( trace_t *results, const vec3_t start, const vec3_t end, vec3_t mi
 			tw.trace.endpos[i] = start[i] + tw.trace.fraction * (end[i] - start[i]);
 		}
 	}
+
+	
+	auto bt_start = btVector3(start[0], start[1], start[2]);
+	auto bt_end = btVector3(end[0], end[1], end[2]);
+	if (bt_start != bt_end) {
+		btCollisionWorld::ClosestRayResultCallback RayCallback(bt_start, bt_end);
+
+		dynamicsWorld->rayTest(bt_start, bt_end, RayCallback);
+		if (RayCallback.hasHit()) {
+			auto bt_normal = RayCallback.m_hitNormalWorld;
+			auto bt_endpos = RayCallback.m_hitPointWorld;
+			float fraction = RayCallback.m_closestHitFraction;
+
+
+			if (ImGui::Begin("bullet trace")) {
+				ImGui::Text("fraction=%.2f", fraction);
+				ImGui::Text("start (%.2f %.2f %.2f) end (%.2f %.2f %.2f)", start[0], start[1], start[2], end[0], end[1], end[2]);
+				ImGui::Text("mins %.2f %.2f %.2f maxs %.2f %.2f %.2f", mins[0], mins[1], mins[2], maxs[0], maxs[1], maxs[2]);
+				ImGui::Text("#####");
+			}
+			ImGui::End();
+
+#if 1
+			tw.trace.fraction = fraction - 0.01;
+			tw.trace.plane.normal[0] = bt_normal.x();
+			tw.trace.plane.normal[1] = bt_normal.y();
+			tw.trace.plane.normal[2] = bt_normal.z();
+			tw.trace.plane.type = 3;
+			tw.trace.endpos[0] = bt_endpos.x();
+			tw.trace.endpos[1] = bt_endpos.y();
+			tw.trace.endpos[2] = bt_endpos.z() + 1;
+#endif
+		}
+	}
+#if 0
+
+#define SLOPE_X_START 400.0f
+#define SLOPE_X_END   800.0f
+#define SLOPE_EPSILON 0.01f
+
+
+	// easy mind values: start = 1000, end = 1020, start_slope = 1005, end_slope = 101
+
+	if (tw.trace.endpos[0] > SLOPE_X_START && tw.trace.endpos[0] < SLOPE_X_END) {
+		//float percent = (/*tw.trace.endpos[0]*/end[0] - SLOPE_X_START) / (SLOPE_X_END / SLOPE_X_START);
+
+
+		// like a wall
+		//tw.trace.endpos[0] = SLOPE_X_START + SLOPE_EPSILON;
+
+		
+		float delta = SLOPE_X_END - SLOPE_X_START; // 12 - 10 = 2
+		float delta_middle = /*tw.trace.endpos[0]*/end[0] - SLOPE_X_START; // 
+		float slope_fraction = delta_middle / delta;
+
+		// walking up a slope... start from SLOPE_X_START to SLOPE_X_END
+		float height_at_x = 20.0 + slope_fraction * 100.0f; // slope_fraction is 0 to 1, so at end we climb 100 units
+		// if end[2] is higher than height_at_x, do nothing...
+		// but this is kinda just a shitty hack
+		// i need to figure out the [2] intersection point from start/end
+
+		// if height_at_x is smaller than endpos[2], we hit the plane
+		if (height_at_x > tw.trace.endpos[2]) {
+			tw.trace.fraction = slope_fraction; // this is not correct aswell... i need the real fraction from start/end
+#if 1
+			//tw.trace.plane.normal[0] = -1.0f;
+			tw.trace.plane.normal[0] = 1.0f;
+			tw.trace.plane.normal[1] = 0.0f;
+			tw.trace.plane.normal[2] = 1.0f;
+			VectorNormalize(tw.trace.plane.normal);
+			tw.trace.plane.type = 3;
+			tw.trace.endpos[2] = height_at_x;
+#else
+			tw.trace.plane.normal[0] = 0;
+			tw.trace.plane.normal[1] = 0;
+			tw.trace.plane.normal[2] = 1;
+			tw.trace.plane.type = 2;
+#endif
+			tw.trace.plane.dist = 0;
+			tw.trace.contents = 1;
+		}
+		
+		if (ImGui::Begin("cm_trace")) {
+			ImGui::Text("delta=%.2f, delta_middle=%.2f, fraction=%.2f", delta, delta_middle, slope_fraction);
+			ImGui::Text("start (%.2f %.2f %.2f) end (%.2f %.2f %.2f)", start[0], start[1], start[2], end[0], end[1], end[2]);
+			ImGui::Text("mins %.2f %.2f %.2f maxs %.2f %.2f %.2f", mins[0], mins[1], mins[2], maxs[0], maxs[1], maxs[2]);
+			ImGui::Text("#####");
+		}
+		ImGui::End();
+	}
+#endif
 
         // If allsolid is set (was entirely inside something solid), the plane is not valid.
         // If fraction == 1.0, we never hit anything, and thus the plane is not valid.

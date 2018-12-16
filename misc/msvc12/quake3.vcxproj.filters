@@ -522,9 +522,6 @@
     <ClCompile Include="..\..\code\renderergl2\tr_model.c">
       <Filter>renderergl2</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\code\renderergl2\tr_model_iqm.c">
-      <Filter>renderergl2</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\code\renderergl2\tr_postprocess.c">
       <Filter>renderergl2</Filter>
     </ClCompile>
@@ -776,6 +773,9 @@
     </ClCompile>
     <ClCompile Include="..\..\code\bullet\bullet_init.cpp">
       <Filter>bullet</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\code\renderergl2\tr_model_iqm.cpp">
+      <Filter>renderergl2</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -1389,9 +1389,10 @@ void CM_Trace( trace_t *results, const vec3_t start, const vec3_t end, vec3_t mi
 			tw.trace.plane.normal[1] = bt_normal.y();
 			tw.trace.plane.normal[2] = bt_normal.z();
 			tw.trace.plane.type = 3;
+
 			tw.trace.endpos[0] = bt_endpos.x();
 			tw.trace.endpos[1] = bt_endpos.y();
-			tw.trace.endpos[2] = bt_endpos.z() + 1;
+			tw.trace.endpos[2] = bt_endpos.z() + 1; // todo:  endpos += normal? need to test with real models
 #endif
 		}
 	}

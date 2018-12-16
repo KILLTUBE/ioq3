@@ -590,21 +590,21 @@ typedef struct {
 
 #define	SnapVector(v) {v[0]=((int)(v[0]));v[1]=((int)(v[1]));v[2]=((int)(v[2]));}
 // just in case you don't want to use the macros
-vec_t _DotProduct( const vec3_t v1, const vec3_t v2 );
-void _VectorSubtract( const vec3_t veca, const vec3_t vecb, vec3_t out );
-void _VectorAdd( const vec3_t veca, const vec3_t vecb, vec3_t out );
-void _VectorCopy( const vec3_t in, vec3_t out );
-void _VectorScale( const vec3_t in, float scale, vec3_t out );
-void _VectorMA( const vec3_t veca, float scale, const vec3_t vecb, vec3_t vecc );
+CCALL vec_t _DotProduct( const vec3_t v1, const vec3_t v2 );
+CCALL void _VectorSubtract( const vec3_t veca, const vec3_t vecb, vec3_t out );
+CCALL void _VectorAdd( const vec3_t veca, const vec3_t vecb, vec3_t out );
+CCALL void _VectorCopy( const vec3_t in, vec3_t out );
+CCALL void _VectorScale( const vec3_t in, float scale, vec3_t out );
+CCALL void _VectorMA( const vec3_t veca, float scale, const vec3_t vecb, vec3_t vecc );
 
-unsigned ColorBytes3 (float r, float g, float b);
-unsigned ColorBytes4 (float r, float g, float b, float a);
+CCALL unsigned ColorBytes3 (float r, float g, float b);
+CCALL unsigned ColorBytes4 (float r, float g, float b, float a);
 
-float NormalizeColor( const vec3_t in, vec3_t out );
+CCALL float NormalizeColor( const vec3_t in, vec3_t out );
 
-float RadiusFromBounds( const vec3_t mins, const vec3_t maxs );
-void ClearBounds( vec3_t mins, vec3_t maxs );
-void AddPointToBounds( const vec3_t v, vec3_t mins, vec3_t maxs );
+CCALL float RadiusFromBounds( const vec3_t mins, const vec3_t maxs );
+CCALL void ClearBounds( vec3_t mins, vec3_t maxs );
+CCALL void AddPointToBounds( const vec3_t v, vec3_t mins, vec3_t maxs );
 
 #if !defined( Q3_VM ) || ( defined( Q3_VM ) && defined( __Q3_VM_MATH ) )
 static ID_INLINE int VectorCompare( const vec3_t v1, const vec3_t v2 ) {
@@ -782,22 +782,17 @@ typedef struct pc_token_s
 
 // data is an in/out parm, returns a parsed out token
 
-void	COM_MatchToken( char**buf_p, char *match );
-
-qboolean SkipBracedSection (char **program, int depth);
-void SkipRestOfLine ( char **data );
-
-void Parse1DMatrix (char **buf_p, int x, float *m);
-void Parse2DMatrix (char **buf_p, int y, int x, float *m);
-void Parse3DMatrix (char **buf_p, int z, int y, int x, float *m);
-int Com_HexStrToInt( const char *str );
-
-int QDECL Com_sprintf (char *dest, int size, const char *fmt, ...) __attribute__ ((format (printf, 3, 4)));
-
-char *Com_SkipTokens( char *s, int numTokens, char *sep );
-char *Com_SkipCharset( char *s, char *sep );
-
-void Com_RandomBytes( byte *string, int len );
+CCALL void	COM_MatchToken( char**buf_p, char *match );
+CCALL qboolean SkipBracedSection (char **program, int depth);
+CCALL void SkipRestOfLine ( char **data );
+CCALL void Parse1DMatrix (char **buf_p, int x, float *m);
+CCALL void Parse2DMatrix (char **buf_p, int y, int x, float *m);
+CCALL void Parse3DMatrix (char **buf_p, int z, int y, int x, float *m);
+CCALL int Com_HexStrToInt( const char *str );
+CCALL int QDECL Com_sprintf (char *dest, int size, const char *fmt, ...) __attribute__ ((format (printf, 3, 4)));
+CCALL char *Com_SkipTokens( char *s, int numTokens, char *sep );
+CCALL char *Com_SkipCharset( char *s, char *sep );
+CCALL void Com_RandomBytes( byte *string, int len );
 
 // mode parm for FS_FOpenFile
 typedef enum {
@@ -815,31 +810,31 @@ typedef enum {
 
 //=============================================
 
-int Q_isprint( int c );
-int Q_islower( int c );
-int Q_isupper( int c );
-int Q_isalpha( int c );
-qboolean Q_isanumber( const char *s );
-qboolean Q_isintegral( float f );
+CCALL int Q_isprint( int c );
+CCALL int Q_islower( int c );
+CCALL int Q_isupper( int c );
+CCALL int Q_isalpha( int c );
+CCALL qboolean Q_isanumber( const char *s );
+CCALL qboolean Q_isintegral( float f );
 
 // portable case insensitive compare
-int		Q_stricmp (const char *s1, const char *s2);
-int		Q_strncmp (const char *s1, const char *s2, int n);
-int		Q_stricmpn (const char *s1, const char *s2, int n);
-char	*Q_strlwr( char *s1 );
-char	*Q_strupr( char *s1 );
-const char	*Q_stristr( const char *s, const char *find);
+CCALL int		Q_stricmp (const char *s1, const char *s2);
+CCALL int		Q_strncmp (const char *s1, const char *s2, int n);
+CCALL int		Q_stricmpn (const char *s1, const char *s2, int n);
+CCALL char	*Q_strlwr( char *s1 );
+CCALL char	*Q_strupr( char *s1 );
+CCALL const char	*Q_stristr( const char *s, const char *find);
 
 // buffer size safe library replacements
-void	Q_strncpyz( char *dest, const char *src, int destsize );
-void	Q_strcat( char *dest, int size, const char *src );
+CCALL void	Q_strncpyz( char *dest, const char *src, int destsize );
+CCALL void	Q_strcat( char *dest, int size, const char *src );
 
 // strlen that discounts Quake color sequences
-int Q_PrintStrlen( const char *string );
+CCALL int Q_PrintStrlen( const char *string );
 // removes color sequences from string
-char *Q_CleanStr( char *string );
+CCALL char *Q_CleanStr( char *string );
 // Count the number of char tocount encountered in string
-int Q_CountChar(const char *string, char tocount);
+CCALL int Q_CountChar(const char *string, char tocount);
 
 //=============================================
 

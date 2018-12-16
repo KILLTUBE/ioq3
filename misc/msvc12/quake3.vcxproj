@@ -906,7 +906,9 @@
     <ClCompile Include="..\..\code\renderergl2\tr_marks.c" />
     <ClCompile Include="..\..\code\renderergl2\tr_mesh.c" />
     <ClCompile Include="..\..\code\renderergl2\tr_model.c" />
-    <ClCompile Include="..\..\code\renderergl2\tr_model_iqm.c" />
+    <ClCompile Include="..\..\code\renderergl2\tr_model_iqm.cpp">
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">CompileAsCpp</CompileAs>
+    </ClCompile>
     <ClCompile Include="..\..\code\renderergl2\tr_postprocess.c" />
     <ClCompile Include="..\..\code\renderergl2\tr_scene.c" />
     <ClCompile Include="..\..\code\renderergl2\tr_shade.c" />

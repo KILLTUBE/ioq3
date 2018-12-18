@@ -503,6 +503,9 @@
       <BrowseInformation Condition="'$(Configuration)|$(Platform)'=='Release TA|Win32'">true</BrowseInformation>
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">MaxSpeed</Optimization>
     </ClCompile>
+    <ClCompile Include="..\..\code\debugdraw\sample_gl_core.cpp">
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">CompileAsCpp</CompileAs>
+    </ClCompile>
     <ClCompile Include="..\..\code\gl3w\GL\gl3w.c" />
     <ClCompile Include="..\..\code\imgui\imgui.cpp">
       <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">CompileAsCpp</CompileAs>
@@ -1090,6 +1093,8 @@
     <ClInclude Include="..\..\code\client\qal.h" />
     <ClInclude Include="..\..\code\client\snd_local.h" />
     <ClInclude Include="..\..\code\client\snd_public.h" />
+    <ClInclude Include="..\..\code\debugdraw\debug_draw.hpp" />
+    <ClInclude Include="..\..\code\debugdraw\samples_common.hpp" />
     <ClInclude Include="..\..\code\game\bg_public.h" />
     <ClInclude Include="..\..\code\game\g_public.h" />
     <ClInclude Include="..\..\code\gl3w\GL\gl3w.h" />

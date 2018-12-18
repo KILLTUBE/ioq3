@@ -638,6 +638,7 @@ void GLimp_EndFrame(void);
 void GL_BindNullTextures(void);
 void GL_BindNullProgram(void);
 void R_BindNullVao(void);
+CCALL void debugdraw_render();
 
 /*
 =================
@@ -723,7 +724,11 @@ int main( int argc, char **argv )
 	imgui_init();
 	while( 1 )
 	{
+		debugdraw_render();
 		imgui_frame_start();
+
+
+
 		GL_BindNullProgram();
 		GL_BindNullTextures();
 		R_BindNullVao();

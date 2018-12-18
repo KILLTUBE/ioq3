@@ -777,6 +777,9 @@
     <ClCompile Include="..\..\code\renderergl2\tr_model_iqm.cpp">
       <Filter>renderergl2</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\code\debugdraw\sample_gl_core.cpp">
+      <Filter>debugdraw</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\code\cgame\cg_public.h" />
@@ -998,6 +1001,12 @@
     <ClInclude Include="..\..\code\bullet\bullet_init.h">
       <Filter>bullet</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\code\debugdraw\debug_draw.hpp">
+      <Filter>debugdraw</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\code\debugdraw\samples_common.hpp">
+      <Filter>debugdraw</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="..\..\code\asm\ftola.asm" />
@@ -1063,6 +1072,9 @@
     </Filter>
     <Filter Include="bullet">
       <UniqueIdentifier>{3113bce6-dc33-4b97-8749-e2d321f8c25b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="debugdraw">
+      <UniqueIdentifier>{b6b31930-46af-4762-a5d8-702fcdd97569}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
